@@ -17,7 +17,7 @@ class BasePage:
         except NoSuchElementException:
             return False
         return True
-=======
+
 class BasePage:
 
     def __init__(self, browser, url):
