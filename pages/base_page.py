@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 from selenium.common.exceptions import NoSuchElementException
 
 class BasePage:
@@ -17,13 +17,3 @@ class BasePage:
         except NoSuchElementException:
             return False
         return True
-
-class BasePage:
-
-    def __init__(self, browser, url):
-        self.browser = browser
-        self.url = url
-        
-    def open(self):
-        self.browser.get(self.url)
->>>>>>> 4422b11cf6c6def53f15ab091d89a4bb1299ee6d
