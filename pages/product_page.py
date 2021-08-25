@@ -33,5 +33,10 @@ class ProductPage(BasePage):
     def check_product_price_in_basket(self):
         product_price_in_basket = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE_IN_BASKET)
         product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE)
-        time.sleep(5)
         assert float(product_price_in_basket.text[1:]) >= float(product_price.text[1:]), "Цена товара отличается от цены в корзине!"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), "Сообщение отображается, но не должно было отображаться!"
+
+    def message_is_dissappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), "Сообщение не исчезло!"
