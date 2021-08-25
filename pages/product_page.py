@@ -1,7 +1,7 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
 from selenium.common.exceptions import NoAlertPresentException
-import math, time
+import math
 
 class ProductPage(BasePage):
     def add_product_to_basket(self):
@@ -19,7 +19,6 @@ class ProductPage(BasePage):
             alert_text = alert.text
             print(f"Your code: {alert_text}")
             alert.accept()
-            #time.sleep(300)
         except NoAlertPresentException:
             print("No second alert presented")
 
