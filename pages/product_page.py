@@ -1,7 +1,7 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
 from selenium.common.exceptions import NoAlertPresentException
-import math
+import math, time
 
 class ProductPage(BasePage):
     def add_product_to_basket(self):
@@ -26,9 +26,12 @@ class ProductPage(BasePage):
     def check_product_name_in_basket(self):
         product_name_in_basket = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_IN_BASKET)
         product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME)
-        assert product_name.text in product_name_in_basket.text, "Продукт не добавлен в корзину!"
+        print("product_name = ",product_name.text)
+        print("product_name_in_basket = ", product_name_in_basket.text)
+        assert product_name.text == product_name_in_basket.text, "Название продукта отличается от названия в корзине!"
 
     def check_product_price_in_basket(self):
         product_price_in_basket = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE_IN_BASKET)
         product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE)
+        time.sleep(5)
         assert float(product_price_in_basket.text[1:]) >= float(product_price.text[1:]), "Цена товара отличается от цены в корзине!"
