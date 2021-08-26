@@ -1,7 +1,7 @@
 from pages.product_page import ProductPage
 from pages.login_page import LoginPage
 from pages.basket_page import BasketPage
-import pytest
+import pytest, time, random
 
 link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
 
@@ -60,3 +60,36 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     basket_page = BasketPage(browser, browser.current_url)
     basket_page.should_be_empty_text_in_basket()
     basket_page.should_not_be_product_in_basket()
+
+
+
+@pytest.mark.classtart(reason="for test new tests")
+class TestUserAddToBasketFromProductPage():
+
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        page = LoginPage(browser, "http://selenium1py.pythonanywhere.com/accounts/login/")
+        page.open()
+        email = str(time.time()) + "@fakemail.org"
+        print("email = ", email)
+        chars = '+-/*!&$#?=@<>abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+        password = ""
+        for i in range(10):
+            password += chars[random.randint(0, len(chars))]
+        print("password = ", password)
+        page.register_new_user(email, password)
+        page.user_login_to_account()
+
+    def test_user_cant_see_success_message(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/"
+        page = ProductPage(browser, link)
+        page.open()
+        page.should_not_be_success_message()
+
+    def test_user_can_add_product_to_basket(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/"
+        page = ProductPage(browser, link)
+        page.open()
+        page.add_product_to_basket()
+        page.check_product_name_in_basket()
+        page.check_product_price_in_basket()
