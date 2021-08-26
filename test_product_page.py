@@ -1,5 +1,6 @@
 from pages.product_page import ProductPage
 from pages.login_page import LoginPage
+from pages.basket_page import BasketPage
 import pytest
 
 link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
@@ -51,3 +52,11 @@ def test_guest_can_add_product_to_basket(browser, end_link):
     page.check_product_name_in_basket()
     page.check_product_price_in_basket()
 
+@pytest.mark.prov(reason="for test new tests")
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    page = ProductPage(browser, "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/")
+    page.open()
+    page.go_to_basket_page()
+    basket_page = BasketPage(browser, browser.current_url)
+    basket_page.should_be_empty_text_in_basket()
+    basket_page.should_not_be_product_in_basket()
