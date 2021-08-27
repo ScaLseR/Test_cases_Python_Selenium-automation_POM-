@@ -1,9 +1,11 @@
 from selenium.webdriver.common.by import By
 
-class MainPageLocators():
+
+class MainPageLocators:
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
 
-class LoginPageLocators():
+
+class LoginPageLocators:
     LOGIN_FORM = (By.ID, "login_form")
     REGISTER_FORM = (By.ID, "register_form")
     EMAIL = (By.ID, "id_registration-email")
@@ -12,7 +14,8 @@ class LoginPageLocators():
     BTN_REG = (By.NAME, "registration_submit")
     LOGOUT = (By.ID, "logout_link")
 
-class ProductPageLocators():
+
+class ProductPageLocators:
     ADD_TO_BASKET_BTN = (By.CSS_SELECTOR, ".btn-add-to-basket")
     PRODUCT_NAME_IN_BASKET = (By.CSS_SELECTOR, ".alertinner strong")
     PRODUCT_NAME = (By.CSS_SELECTOR, ".product_main h1")
@@ -20,12 +23,14 @@ class ProductPageLocators():
     PRODUCT_PRICE = (By.CSS_SELECTOR, ".product_main p.price_color")
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, ".alertinner")
 
-class BasePageLocators():
+
+class BasePageLocators:
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
     BASKET_LINK = (By.CSS_SELECTOR, ".btn-group .btn-default")
     USER_ICON = (By.CSS_SELECTOR, ".icon-user")
 
-class BasketPageLocators():
+
+class BasketPageLocators:
     BASKET_EMPTY_TEXT = (By.CSS_SELECTOR, "#content_inner a")
     BASKET_EMPTY_PRODUCT = (By.CSS_SELECTOR, ".carousel")

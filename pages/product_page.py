@@ -3,6 +3,7 @@ from .locators import ProductPageLocators
 from selenium.common.exceptions import NoAlertPresentException
 import math
 
+
 class ProductPage(BasePage):
     def add_product_to_basket(self):
         add_to_basket_button = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BTN)
@@ -22,21 +23,22 @@ class ProductPage(BasePage):
         except NoAlertPresentException:
             print("No second alert presented")
 
-
     def check_product_name_in_basket(self):
         product_name_in_basket = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_IN_BASKET)
         product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME)
-        print("product_name = ",product_name.text)
+        print("product_name = ", product_name.text)
         print("product_name_in_basket = ", product_name_in_basket.text)
         assert product_name.text == product_name_in_basket.text, "Название продукта отличается от названия в корзине!"
 
     def check_product_price_in_basket(self):
         product_price_in_basket = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE_IN_BASKET)
         product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE)
-        assert float(product_price_in_basket.text[1:]) >= float(product_price.text[1:]), "Цена товара отличается от цены в корзине!"
+        assert float(product_price_in_basket.text[1:]) >= float(product_price.text[1:]), "Цена товара отличается от " \
+                                                                                         "цены в корзине! "
 
     def should_not_be_success_message(self):
-        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), "Сообщение отображается, но не должно было отображаться!"
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), "Сообщение отображается, но не " \
+                                                                                  "должно было отображаться! "
 
     def message_is_dissappeared(self):
         assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), "Сообщение не исчезло, но должно было!"

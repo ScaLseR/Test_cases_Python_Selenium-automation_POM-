@@ -28,5 +28,6 @@ class LoginPage(BasePage):
         btn_reg.click()
 
     def user_login_to_account(self):
-        assert self.is_element_present(*LoginPageLocators.LOGOUT), "Пользователь не зашел в аккаунт, регистрация не проведена!"
+        assert self.is_element_present(*LoginPageLocators.LOGOUT), "Пользователь не зашел в аккаунт, регистрация не " \
+                                                                   "проведена! "
 
