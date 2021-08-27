@@ -1,5 +1,4 @@
 import pytest
-import random
 import time
 
 from pages.basket_page import BasketPage
@@ -74,12 +73,7 @@ class TestUserAddToBasketFromProductPage:
         page = LoginPage(browser, "http://selenium1py.pythonanywhere.com/accounts/login/")
         page.open()
         email = str(time.time()) + "@fakemail.org"
-        print("email = ", email)
-        chars = '+-/*!&$#?=@<>abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
-        password = ""
-        for i in range(10):
-            password += chars[random.randint(0, len(chars))]
-        print("password = ", password)
+        password = LoginPage.generate_password(self, 10)
         page.register_new_user(email, password)
         page.user_login_to_account()
 
@@ -88,7 +82,7 @@ class TestUserAddToBasketFromProductPage:
         page.open()
         page.should_not_be_success_message()
 
-    @pytest.mark.need_review
+    @pytest.mark.need_review1
     def test_user_can_add_product_to_basket(self, browser):
         page = ProductPage(browser, "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/")
         page.open()

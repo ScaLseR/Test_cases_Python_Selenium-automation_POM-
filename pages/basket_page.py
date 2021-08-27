@@ -10,5 +10,4 @@ class BasketPage(BasePage):
 
     def should_be_empty_text_in_basket(self):
         empty_text = self.browser.find_element(*BasketPageLocators.BASKET_EMPTY_TEXT)
-        print("empty_text.text=  ", empty_text.text)
         assert empty_text.text in "Continue shopping", "В корзине находится товар, хотя не должен быть!"

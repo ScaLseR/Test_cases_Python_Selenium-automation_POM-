@@ -1,6 +1,6 @@
 from .base_page import BasePage
 from .locators import LoginPageLocators
-
+import random
 
 class LoginPage(BasePage):
     def should_be_login_page(self):
@@ -30,4 +30,10 @@ class LoginPage(BasePage):
     def user_login_to_account(self):
         assert self.is_element_present(*LoginPageLocators.LOGOUT), "Пользователь не зашел в аккаунт, регистрация не " \
                                                                    "проведена! "
+    def generate_password(self, lenght):
+        chars = '+-/*!&$#?=@<>abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+        password = ""
+        for i in range(lenght):
+            password += chars[random.randint(0, len(chars))]
+        return password
 
